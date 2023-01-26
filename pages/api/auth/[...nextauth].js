@@ -24,23 +24,22 @@ export const authOptions = {
           password: credentials.password,
         };
 
-        console.log(credentialDetails);
+        const resp = await fetch(backendURL + "/api/auth/login", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(credentialDetails),
+        });
+        const user = await resp.json();
 
-        // const resp = await fetch(backendURL + "/auth/login", {
-        //   method: "POST",
-        //   headers: {
-        //     Accept: "application/json",
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify(credentialDetails),
-        // });
-        // const user = await resp.json();
-        const user = {
-          id: "1",
-          name: "J Smith",
-          email: "jsmith@example.com",
-          is_success: true,
-        };
+        // const user = {
+        //   id: "1",
+        //   name: "J Smith",
+        //   email: "jsmith@example.com",
+        //   is_success: true,
+        // };
 
         if (user.is_success) {
           console.log("nextauth daki user: " + user.is_success);
